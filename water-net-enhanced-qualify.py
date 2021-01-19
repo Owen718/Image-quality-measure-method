@@ -13,9 +13,13 @@ import uqim_utils
 # ref_file = r'sample1.jpg'
 # dist_file = r'sample1_tmp.jpg'
 
-ref_path = r'D:\水下图片数据集\reference-890\reference-890' #参考图像目录
+ref_path = r'D:\underwaterImageDateset\test-90\groundtruth_test' #参考图像目录
+
 #dist_path =r'D:\python_code\Single-Underwater-Image-Enhancement-and-Color-Restoration-master\Underwater Image Color Restoration\UDCP\OutputImages' #测试图像目录
-dist_path = r'D:\python_code\Single-Underwater-Image-Enhancement-and-Color-Restoration-master\Underwater-Image-Enhancement-based-on-Fusion-Python-main\OutputImages'
+#dist_path = r'D:\python_code\Single-Underwater-Image-Enhancement-and-Color-Restoration-master\Underwater-Image-Enhancement-based-on-Fusion-Python-main\OutputImages'
+#dist_path = r'D:\water-net-result\sample'
+dist_path = r'D:\github\MSR-D-enhance-underwater-image\test90_FullA'
+
 def cv_show(img,name):
     cv2.imshow(img,name)
     cv2.waitKey(0)
@@ -24,7 +28,7 @@ def cv_show(img,name):
 ref_filelist = os.listdir(ref_path) #参考图像文件列表
 dist_filelist = os.listdir(dist_path) #测试图像文件列表
 
-save_file = 'fusion_based_measure_data.txt'
+save_file = 'OURS1_test90_2020_1_20_1.txt'
 psnr_list=[]
 ssim_list=[]
 uiqm_list=[]
@@ -38,14 +42,14 @@ for dist_file in dist_filelist: #遍历
     dist_img = scipy.misc.imread(dist_file_dir, flatten=True).astype(numpy.float32)
     
     #filename = os.path.splitext(dist_file)[0] + os.path.splitext(dist_file)[1]  #ref filename
-    filename = os.path.splitext(dist_file)[0] + '.png'  #ref filename
+    filename = os.path.splitext(dist_file)[0] + '.jpg'  #ref filename
     
     ref_img = scipy.misc.imread(ref_path + '\\' + filename ,flatten=True).astype(numpy.float32) #读取参考图像对应的测试图像
 
     psnr_data = psnr.psnr(ref_img,dist_img) #psnr指标
     ssim_data = ssim.ssim_exact(ref_img/255,dist_img/255) #ssim指标
     
-    dist_img = cv2.imread(dist_path + '\\' + os.path.splitext(dist_file)[0]+'.png') #UIQM指标
+    dist_img = cv2.imread(dist_path + '\\' + os.path.splitext(dist_file)[0]+'.jpg') #UIQM指标
     uiqm_data = uqim_utils.getUIQM(dist_img) #UIQM
 
     print("img:" + str(filename)+" psnr:" + str(psnr_data) + " ssim:"+str(ssim_data)+ " UIQM:" + str(uiqm_data))
