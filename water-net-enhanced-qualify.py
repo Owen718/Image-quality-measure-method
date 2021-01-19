@@ -28,7 +28,7 @@ def cv_show(img,name):
 ref_filelist = os.listdir(ref_path) #参考图像文件列表
 dist_filelist = os.listdir(dist_path) #测试图像文件列表
 
-save_file = 'OURS1_test90_2020_1_20_1.txt'
+save_file = 'OURS1_test90_2020_1_20_2.txt'
 psnr_list=[]
 ssim_list=[]
 uiqm_list=[]
