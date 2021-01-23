@@ -13,13 +13,12 @@ import uqim_utils
 # ref_file = r'sample1.jpg'
 # dist_file = r'sample1_tmp.jpg'
 
-ref_path = r'D:\underwaterImageDateset\test-90\groundtruth_test' #参考图像目录
+ref_path = r'groundtruth_test\\' #参考图像目录
 
 #dist_path =r'D:\python_code\Single-Underwater-Image-Enhancement-and-Color-Restoration-master\Underwater Image Color Restoration\UDCP\OutputImages' #测试图像目录
 #dist_path = r'D:\python_code\Single-Underwater-Image-Enhancement-and-Color-Restoration-master\Underwater-Image-Enhancement-based-on-Fusion-Python-main\OutputImages'
 #dist_path = r'D:\water-net-result\sample'
 dist_path = r'D:\github\MSR-D-enhance-underwater-image\test90_FullA'
-
 def cv_show(img,name):
     cv2.imshow(img,name)
     cv2.waitKey(0)
@@ -28,7 +27,7 @@ def cv_show(img,name):
 ref_filelist = os.listdir(ref_path) #参考图像文件列表
 dist_filelist = os.listdir(dist_path) #测试图像文件列表
 
-save_file = 'OURS1_test90_2020_1_20_2.txt'
+save_file = 'OURS1_ColorCorrect_MSR_NOCR__test90_2020_1_21_1.txt'  
 psnr_list=[]
 ssim_list=[]
 uiqm_list=[]
