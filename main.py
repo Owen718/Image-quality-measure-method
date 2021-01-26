@@ -20,8 +20,11 @@ ref_path = r'groundtruth_test\\' #参考图像目录
 
 #dist_path =r'D:\python_code\Single-Underwater-Image-Enhancement-and-Color-Restoration-master\Underwater Image Color Restoration\UDCP\OutputImages' #测试图像目录
 #dist_path = r'D:\python_code\Single-Underwater-Image-Enhancement-and-Color-Restoration-master\Underwater-Image-Enhancement-based-on-Fusion-Python-main\OutputImages'
-#dist_path = r'D:\water-net-result\sample'
-dist_path = r'D:\github\MSR-D-enhance-underwater-image\test90_FullA'
+dist_path = r'D:\github\cv-paper-reproduction\water-net\sample'
+#dist_path = r'D:\github\MSR-D-enhance-underwater-image\test90_FullA'
+#dist_path =r'D:\python_code\Single-Underwater-Image-Enhancement-and-Color-Restoration-master\Underwater Image Color Restoration\UDCP\OutputImages'
+#dist_path  = r'D:\python_code\Single-Underwater-Image-Enhancement-and-Color-Restoration-master\Underwater Image Color Restoration\DCP\OutputImages'
+#dist_path =r'D:\python_code\Single-Underwater-Image-Enhancement-and-Color-Restoration-master\Underwater Image Enhancement\CLAHE\OutputImages'
 def cv_show(img,name):
     cv2.imshow(img,name)
     cv2.waitKey(0)
@@ -30,7 +33,7 @@ def cv_show(img,name):
 ref_filelist = os.listdir(ref_path) #参考图像文件列表
 dist_filelist = os.listdir(dist_path) #测试图像文件列表
 
-save_file = 'OURS1_ColorCorrect_MSR_NOCR__test90_2020_1_26_1.txt'  
+save_file = 'water-net_test90_sample2_2020_1_26_2.txt'  
 psnr_list=[]
 ssim_list=[]
 uiqm_list=[]
@@ -42,21 +45,20 @@ for dist_file in dist_filelist: #遍历
     if os.path.isdir(dist_file_dir): #如果是文件夹，跳过
         continue 
 
-    #dist_img = scipy.misc.imread(dist_file_dir, flatten=True).astype(numpy.float32)
     dist_img = cv2.imread(dist_file_dir)
     dist_img = numpy.float32(dist_img)
-    #filename = os.path.splitext(dist_file)[0] + os.path.splitext(dist_file)[1]  #ref filename
     filename = os.path.splitext(dist_file)[0] + '.jpg'  #ref filename
     
     ref_img = cv2.imread(ref_path+'\\'+filename)
     ref_img = numpy.float32(ref_img)
-    #ref_img = scipy.misc.imread(ref_path + '\\' + filename ,flatten=True).astype(numpy.float32) #读取参考图像对应的测试图像
+
 
     psnr_data = psnr.psnr(ref_img,dist_img) #psnr指标
     ssim_data = ssim.ssim_exact(ref_img/255,dist_img/255) #ssim指标
     
     dist_img = cv2.imread(dist_path + '\\' + os.path.splitext(dist_file)[0]+'.jpg') #UIQM指标
     uiqm_data = uqim_utils.getUIQM(dist_img) #UIQM
+    uiqm_data = 0
 
     uciqe_data = eng.test_UCIQE2py(dist_file_dir)
 
