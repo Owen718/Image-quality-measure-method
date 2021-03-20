@@ -16,12 +16,28 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import numpy
+import numpy as np
 import math
 
-def psnr(img1, img2):
-    mse = numpy.mean( (img1 - img2) ** 2 )
+# def psnr(img1, img2):
+#     mse = numpy.mean( (img1 - img2) ** 2 )
+#     if mse == 0:
+#         return 100
+#     PIXEL_MAX = 255.0
+#     return 20 * math.log10(PIXEL_MAX / math.sqrt(mse))
+
+def psnr(img1,img2):
+    diff = np.float64((img1-img2) ** 2)
+    mse = np.mean(diff)
     if mse == 0:
         return 100
     PIXEL_MAX = 255.0
-    return 20 * math.log10(PIXEL_MAX / math.sqrt(mse))
+    return 20 * np.log10(PIXEL_MAX/np.sqrt(mse))
+
+def MSE(img1,img2):
+    diff = np.float64((img1-img2) ** 2)
+    mse = np.mean(diff)
+    if mse == 0:
+        return 100
+    
+    return mse
